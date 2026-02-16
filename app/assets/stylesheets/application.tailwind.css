@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #1a1a1f;
+    background-image: none;
+  }
+
+  .app-bg {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .app-bg::before {
+    display: none;
+  }
+
+  .app-bg > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* カードホバーエフェクト */
+  .card-glow {
+    transition: box-shadow 0.3s ease, transform 0.25s ease, border-color 0.3s ease;
+  }
+
+  .card-glow:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  /* ナビゲーション */
+  .nav-glass {
+    background: #222228;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* フィルタバー */
+  .filter-glass {
+    background: #222228;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* チャート */
+  .chart-glass {
+    background: #222228;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* カード */
+  .card-glass {
+    background: #222228;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* 価格スライダー */
+  .price-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+  }
+
+  .price-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .price-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  .price-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* メーカーバッジ */
+  .badge-nvidia {
+    background: linear-gradient(135deg, #76b900, #4a8000);
+  }
+
+  .badge-amd {
+    background: linear-gradient(135deg, #ed1c24, #b0151b);
+  }
+
+  .badge-intel {
+    background: linear-gradient(135deg, #0071c5, #004a80);
+  }
+}

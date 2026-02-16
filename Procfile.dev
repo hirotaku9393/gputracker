@@ -1,0 +1,4 @@
+web: env RUBY_DEBUG_OPEN=true bin/rails server -p 3001
+js: npx esbuild app/javascript/application.tsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.tsx=tsx --loader:.ts=ts --watch=forever
+css: while true; do npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify; sleep 2; done
+# worker: bundle exec sidekiq  # Redis が必要。Redis起動後にコメント解除

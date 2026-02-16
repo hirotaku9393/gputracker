@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ruby --version:*)",
+      "Bash(rails:*)",
+      "Bash(node --version:*)",
+      "Bash(npm --version)",
+      "Bash(psql:*)",
+      "Bash(gem list:*)",
+      "Bash(bundle install:*)",
+      "Bash(yarn add:*)",
+      "Bash(yarn build:*)",
+      "Bash(yarn build:css:*)",
+      "Bash(bin/dev:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(npx @tailwindcss/cli:*)",
+      "Bash(chmod:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(ss:*)",
+      "Bash(netstat:*)"
+    ]
+  }
+}
