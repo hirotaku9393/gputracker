@@ -25,23 +25,23 @@ export default function Pagination({ currentPage, totalPages, totalCount, onPage
   }
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-8 mb-4">
+    <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8 mb-4">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage <= 1}
-        className="px-3 py-2 rounded-lg text-sm font-medium transition bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
       >
         &laquo; 前へ
       </button>
 
       {pages.map((page, i) =>
         page === "..." ? (
-          <span key={`dots-${i}`} className="px-2 text-gray-500">...</span>
+          <span key={`dots-${i}`} className="px-1.5 sm:px-2 text-gray-500 text-sm">...</span>
         ) : (
           <button
             key={page}
             onClick={() => onPageChange(page)}
-            className={`w-10 h-10 rounded-lg text-sm font-medium transition ${
+            className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg text-xs sm:text-sm font-medium transition ${
               page === currentPage
                 ? "bg-white text-gray-900 shadow-md"
                 : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 border border-white/5"
@@ -55,12 +55,12 @@ export default function Pagination({ currentPage, totalPages, totalCount, onPage
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages}
-        className="px-3 py-2 rounded-lg text-sm font-medium transition bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
+        className="px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed"
       >
         次へ &raquo;
       </button>
 
-      <span className="ml-4 text-xs text-gray-500">
+      <span className="w-full sm:w-auto text-center sm:ml-4 text-xs text-gray-500 mt-1 sm:mt-0">
         全{totalCount}件
       </span>
     </div>

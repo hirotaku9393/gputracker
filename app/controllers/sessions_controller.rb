@@ -12,6 +12,6 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_path
+    redirect_to root_path(error: "login_failed")
   end
 end

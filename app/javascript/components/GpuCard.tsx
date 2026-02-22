@@ -78,21 +78,27 @@ export default function GpuCard({ gpu, onFavoriteToggle }: Props) {
           </button>
         )}
       </div>
-      <div className="p-4">
-        <h3 className="text-white font-semibold text-sm mb-1 truncate">
+      <div className="p-3 sm:p-4">
+        <h3 className="text-white font-semibold text-xs sm:text-sm mb-1 truncate">
           {gpu.name}
         </h3>
-        <p className="text-gray-400 text-xs mb-2">
+        <p className="text-gray-400 text-[10px] sm:text-xs mb-2 truncate">
           {gpu.series} / VRAM {gpu.vram}GB
         </p>
-        <div className="flex items-center justify-between">
-          <span className="text-white font-bold text-lg">
+        <div className="flex items-center justify-between gap-1">
+          <span className="text-white font-bold text-sm sm:text-lg">
             {gpu.current_price > 0 ? formatPrice(gpu.current_price) : "価格未取得"}
           </span>
-          <span className="text-gray-400 text-xs">
+          <span className="text-gray-400 text-[10px] sm:text-xs shrink-0">
             Score: {gpu.benchmark_score?.toLocaleString() ?? "-"}
           </span>
         </div>
+        {gpu.cost_performance > 0 && (
+          <div className="mt-1 sm:mt-1.5 flex items-center gap-1.5">
+            <span className="text-gray-500 text-[10px] sm:text-xs">コスパ</span>
+            <span className="text-amber-400 font-semibold text-xs sm:text-sm">{gpu.cost_performance.toFixed(1)}</span>
+          </div>
+        )}
       </div>
     </Link>
   );

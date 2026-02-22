@@ -8,6 +8,7 @@ export interface Gpu {
   image_url: string | null;
   current_price: number;
   popularity: number;
+  cost_performance: number;
   favorited: boolean;
 }
 
@@ -28,6 +29,7 @@ export type SortOption =
   | "price_asc"
   | "price_desc"
   | "performance"
+  | "cost_performance"
   | "name";
 
 export interface SavedSearch {

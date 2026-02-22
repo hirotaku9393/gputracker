@@ -19,7 +19,25 @@
       "Bash(git init:*)",
       "Bash(git add:*)",
       "Bash(ss:*)",
-      "Bash(netstat:*)"
+      "Bash(netstat:*)",
+      "WebFetch(domain:www.dospara.co.jp)",
+      "Bash(RAILS_ENV=development bundle exec rails runner:*)",
+      "Bash(bundle exec rails:*)",
+      "WebSearch",
+      "WebFetch(domain:www.nvidia.com)",
+      "WebFetch(domain:www.amd.com)",
+      "WebFetch(domain:www.intel.com)",
+      "WebFetch(domain:nvidianews.nvidia.com)",
+      "WebFetch(domain:newsroom.intel.com)",
+      "WebFetch(domain:ir.amd.com)",
+      "WebFetch(domain:www.techpowerup.com)",
+      "WebFetch(domain:assets.nvidia.partners)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "Bash(ls:*)",
+      "Bash(pkill:*)",
+      "Bash(npx esbuild:*)",
+      "Bash(ruby -rjson -e:*)",
+      "Bash(claude trust:*)"
     ]
   }
 }

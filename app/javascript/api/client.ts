@@ -17,6 +17,7 @@ export interface PaginatedGpus {
 }
 
 export async function fetchGpus(params: {
+  q?: string;
   sort?: string;
   manufacturer?: string;
   price_min?: string;

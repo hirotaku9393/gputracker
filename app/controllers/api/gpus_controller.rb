@@ -5,7 +5,8 @@ module Api
     PER_PAGE = 15
 
     def index
-      gpus = Gpu.all
+      ransack_params = params[:q].present? ? { name_or_series_cont: params[:q] } : {}
+      gpus = Gpu.ransack(ransack_params).result
       gpus = gpus.by_manufacturer(params[:manufacturer]) if params[:manufacturer].present?
       gpus = gpus.price_between(params[:price_min], params[:price_max])
 
@@ -13,6 +14,7 @@ module Api
              when "price_asc" then gpus.by_price_asc
              when "price_desc" then gpus.by_price_desc
              when "performance" then gpus.by_performance
+             when "cost_performance" then gpus.by_cost_performance
              when "name" then gpus.by_name
              else gpus.by_popularity
              end
@@ -50,6 +52,12 @@ module Api
     private
 
     def gpu_json(gpu)
+      cost_performance = if gpu.current_price.to_i > 0 && gpu.benchmark_score.to_i > 0
+                           (gpu.benchmark_score.to_f / gpu.current_price * 10_000).round(2)
+                         else
+                           0.0
+                         end
+
       {
         id: gpu.id,
         name: gpu.name,
@@ -59,7 +67,8 @@ module Api
         benchmark_score: gpu.benchmark_score,
         image_url: gpu.image_url,
         current_price: gpu.current_price,
-        popularity: gpu.popularity
+        popularity: gpu.popularity,
+        cost_performance: cost_performance
       }
     end
   end

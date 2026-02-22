@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { SortOption } from "../types";
 
 interface Props {
+  query: string;
+  onQueryChange: (q: string) => void;
   sort: SortOption;
   onSortChange: (sort: SortOption) => void;
   manufacturer: string;
@@ -17,6 +19,7 @@ const SORT_OPTIONS: { label: string; value: SortOption }[] = [
   { label: "価格が安い順", value: "price_asc" },
   { label: "価格が高い順", value: "price_desc" },
   { label: "性能順", value: "performance" },
+  { label: "コスパ順", value: "cost_performance" },
   { label: "名前順", value: "name" },
 ];
 
@@ -39,6 +42,8 @@ function formatPrice(price: number): string {
 }
 
 export default function FilterBar({
+  query,
+  onQueryChange,
   sort,
   onSortChange,
   manufacturer,
@@ -48,6 +53,20 @@ export default function FilterBar({
   priceMax,
   onPriceMaxChange,
 }: Props) {
+  const [localQuery, setLocalQuery] = useState(query);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+
+  // 親のqueryが外部から変わった場合（保存検索適用など）に同期
+  useEffect(() => {
+    setLocalQuery(query);
+  }, [query]);
+
+  const handleQueryInput = (value: string) => {
+    setLocalQuery(value);
+    clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => onQueryChange(value), 400);
+  };
+
   const minVal = priceMin ? Number(priceMin) : PRICE_MIN;
   const maxVal = priceMax ? Number(priceMax) : PRICE_MAX;
 
@@ -55,8 +74,22 @@ export default function FilterBar({
   const maxPercent = ((maxVal - PRICE_MIN) / (PRICE_MAX - PRICE_MIN)) * 100;
 
   return (
-    <div className="filter-glass rounded-xl p-5 mb-6">
-      <div className="flex flex-wrap gap-5 items-end">
+    <div className="filter-glass rounded-xl p-4 sm:p-5 mb-6">
+      {/* キーワード検索 */}
+      <div className="mb-4">
+        <label className="block text-gray-400 text-xs font-medium mb-1.5 tracking-wide">
+          キーワード検索
+        </label>
+        <input
+          type="text"
+          value={localQuery}
+          onChange={(e) => handleQueryInput(e.target.value)}
+          placeholder="GPU名・シリーズ名で検索..."
+          className="w-full bg-white/5 border border-white/10 text-white rounded-lg px-3 py-2 text-sm placeholder-gray-600 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-white/10 transition"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap gap-4 sm:gap-5 lg:items-end">
         {/* 並び替え */}
         <div>
           <label className="block text-gray-400 text-xs font-medium mb-1.5 tracking-wide">
@@ -65,7 +98,7 @@ export default function FilterBar({
           <select
             value={sort}
             onChange={(e) => onSortChange(e.target.value as SortOption)}
-            className="bg-white/5 border border-white/10 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-white/10 transition"
+            className="w-full sm:w-auto bg-white/5 border border-white/10 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-white/10 transition"
           >
             {SORT_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value} className="bg-gray-900">
@@ -80,12 +113,12 @@ export default function FilterBar({
           <label className="block text-gray-400 text-xs font-medium mb-1.5 tracking-wide">
             メーカー
           </label>
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1.5">
             {MANUFACTURERS.map((m) => (
               <button
                 key={m.value}
                 onClick={() => onManufacturerChange(m.value)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition ${
+                className={`px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition ${
                   manufacturer === m.value
                     ? "bg-white text-gray-900 shadow-md"
                     : "bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 border border-white/5"
@@ -98,7 +131,7 @@ export default function FilterBar({
         </div>
 
         {/* 価格帯スライダー */}
-        <div className="flex-1 min-w-64">
+        <div className="sm:col-span-2 lg:flex-1 lg:min-w-64">
           <label className="block text-gray-400 text-xs font-medium mb-1.5 tracking-wide">
             価格帯
           </label>

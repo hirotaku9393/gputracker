@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import type { Gpu, SortOption, SavedSearch } from "../types";
 import { fetchGpus } from "../api/client";
+import { useToast } from "../contexts/ToastContext";
 import GpuCard from "../components/GpuCard";
 import FilterBar from "../components/FilterBar";
 import Pagination from "../components/Pagination";
@@ -11,6 +12,7 @@ const SORT_LABELS: Record<SortOption, string> = {
   price_asc: "価格安い順",
   price_desc: "価格高い順",
   performance: "性能順",
+  cost_performance: "コスパ順",
   name: "名前順",
 };
 
@@ -33,8 +35,10 @@ export default function GpuListPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
   const [savedSearches, setSavedSearches] = useState<SavedSearch[]>(loadSavedSearches);
+  const { showToast } = useToast();
 
   // URLクエリからフィルタ状態を取得
+  const query = searchParams.get("q") || "";
   const sort = (searchParams.get("sort") as SortOption) || "popularity";
   const manufacturer = searchParams.get("manufacturer") || "";
   const priceMin = searchParams.get("price_min") || "";
@@ -54,6 +58,7 @@ export default function GpuListPage() {
     setLoading(true);
     try {
       const result = await fetchGpus({
+        q: query || undefined,
         sort,
         manufacturer: manufacturer || undefined,
         price_min: priceMin || undefined,
@@ -65,15 +70,17 @@ export default function GpuListPage() {
       setTotalCount(result.meta.total_count);
     } catch (err) {
       console.error("GPU一覧の取得に失敗しました", err);
+      showToast("GPU一覧の取得に失敗しました", "error");
     } finally {
       setLoading(false);
     }
-  }, [sort, manufacturer, priceMin, priceMax, page]);
+  }, [query, sort, manufacturer, priceMin, priceMax, page]);
 
   useEffect(() => {
     loadGpus();
   }, [loadGpus]);
 
+  const handleQueryChange = (q: string) => updateParams({ q, page: "" });
   const handleSortChange = (s: SortOption) => updateParams({ sort: s, page: "" });
   const handleManufacturerChange = (m: string) => updateParams({ manufacturer: m, page: "" });
   const handlePriceMinChange = (v: string) => updateParams({ price_min: v, page: "" });
@@ -123,12 +130,14 @@ export default function GpuListPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold text-white mb-6">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+      <h1 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
         GPU 価格一覧
       </h1>
 
       <FilterBar
+        query={query}
+        onQueryChange={handleQueryChange}
         sort={sort}
         onSortChange={handleSortChange}
         manufacturer={manufacturer}
@@ -174,7 +183,7 @@ export default function GpuListPage() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
             {gpus.map((gpu) => (
               <GpuCard key={gpu.id} gpu={gpu} onFavoriteToggle={loadGpus} />
             ))}

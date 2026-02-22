@@ -49,6 +49,9 @@ gem "sidekiq-cron"
 # HTTP client
 gem "faraday"
 
+# Search
+gem "ransack"
+
 # CORS
 gem "rack-cors"
 

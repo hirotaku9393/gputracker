@@ -3,6 +3,14 @@ class Gpu < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_by_users, through: :favorites, source: :user
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name series manufacturer vram benchmark_score current_price popularity]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
   validates :name, presence: true, uniqueness: true
   validates :amazon_asin, uniqueness: true, allow_nil: true
 
@@ -11,6 +19,10 @@ class Gpu < ApplicationRecord
   scope :by_performance, -> { order(benchmark_score: :desc) }
   scope :by_popularity, -> { order(popularity: :desc) }
   scope :by_name, -> { order(name: :asc) }
+  scope :by_cost_performance, -> {
+    where("current_price > 0 AND benchmark_score > 0")
+      .order(Arel.sql("CAST(benchmark_score AS float) / current_price DESC"))
+  }
   scope :price_between, ->(min, max) {
     rel = all
     rel = rel.where("current_price >= ?", min) if min.present?
