@@ -10,7 +10,7 @@ services:
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
+    startCommand: "./bin/rails server"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -28,5 +28,3 @@ services:
         sync: false
       - key: GOOGLE_CLIENT_SECRET
         sync: false
-      - key: SOLID_QUEUE_IN_PUMA
-        value: "1"
