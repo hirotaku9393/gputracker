@@ -1,0 +1,3 @@
+alice_rtx_4090:
+  user: alice
+  gpu: rtx_4090

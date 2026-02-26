@@ -1,0 +1,32 @@
+rtx_4090:
+  name: "ASUS ROG STRIX NVIDIA RTX 4090"
+  manufacturer: "NVIDIA"
+  series: "RTX 4090"
+  vram: 24
+  benchmark_score: 5200
+  image_url: "https://example.com/rtx4090.jpg"
+  amazon_asin: "B0TESTRTX490"
+  current_price: 320000
+  popularity: 10
+
+rx_7900_xtx:
+  name: "SAPPHIRE NITRO+ AMD RX 7900 XTX"
+  manufacturer: "AMD"
+  series: "RX 7900 XTX"
+  vram: 24
+  benchmark_score: 4314
+  image_url:
+  amazon_asin:
+  current_price: 160000
+  popularity: 5
+
+zero_price_gpu:
+  name: "Test Zero Price GPU"
+  manufacturer: "Intel"
+  series: "Arc B580"
+  vram: 12
+  benchmark_score: 2127
+  image_url:
+  amazon_asin:
+  current_price: 0
+  popularity: 0

@@ -34,12 +34,6 @@ const PRICE_MIN = 0;
 const PRICE_MAX = 500000;
 const PRICE_STEP = 5000;
 
-function formatPrice(price: number): string {
-  if (price >= 10000) {
-    return `${(price / 10000).toFixed(price % 10000 === 0 ? 0 : 1)}万`;
-  }
-  return `¥${price.toLocaleString()}`;
-}
 
 export default function FilterBar({
   query,

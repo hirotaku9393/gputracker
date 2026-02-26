@@ -27,15 +27,14 @@ function formatYen(value: number): string {
 }
 
 export default function PriceChart({ gpuId }: Props) {
-  const [data, setData] = useState<PriceHistoryPoint[]>([]);
+  const [data, setData] = useState<PriceHistoryPoint[] | null>(null);
   const [days, setDays] = useState(30);
-  const [loading, setLoading] = useState(true);
+
+  const loading = data === null;
 
   useEffect(() => {
-    setLoading(true);
-    fetchPriceHistories(gpuId, days)
-      .then(setData)
-      .finally(() => setLoading(false));
+    fetchPriceHistories(gpuId, days).then((result) => setData(result));
+    return () => setData(null);
   }, [gpuId, days]);
 
   return (
@@ -62,13 +61,13 @@ export default function PriceChart({ gpuId }: Props) {
         <div className="h-64 flex items-center justify-center text-gray-400">
           読み込み中...
         </div>
-      ) : data.length === 0 ? (
+      ) : data!.length === 0 ? (
         <div className="h-64 flex items-center justify-center text-gray-400">
           価格データがありません
         </div>
       ) : (
         <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data}>
+          <LineChart data={data!}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
             <XAxis
               dataKey="date"

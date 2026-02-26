@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import type { Gpu } from "../types";
 import { useAuth } from "../contexts/AuthContext";
 import { addFavorite, removeFavorite } from "../api/client";
@@ -29,6 +29,7 @@ function manufacturerBadge(manufacturer: string): string {
 
 export default function GpuCard({ gpu, onFavoriteToggle }: Props) {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -48,9 +49,12 @@ export default function GpuCard({ gpu, onFavoriteToggle }: Props) {
   };
 
   return (
-    <Link
-      to={`/gpus/${gpu.id}`}
-      className="block card-glass rounded-xl shadow-md card-glow overflow-hidden"
+    <div
+      role="article"
+      tabIndex={0}
+      onClick={() => navigate(`/gpus/${gpu.id}`)}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") navigate(`/gpus/${gpu.id}`); }}
+      className="block card-glass rounded-xl shadow-md card-glow overflow-hidden cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
     >
       <div className="relative">
         <GpuImage
@@ -99,7 +103,29 @@ export default function GpuCard({ gpu, onFavoriteToggle }: Props) {
             <span className="text-amber-400 font-semibold text-xs sm:text-sm">{gpu.cost_performance.toFixed(1)}</span>
           </div>
         )}
+        <div className="mt-2 pt-2 border-t border-white/5 grid grid-cols-2 gap-1.5">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(`https://www.amazon.co.jp/s?k=${encodeURIComponent(gpu.name)}`, "_blank", "noopener,noreferrer");
+            }}
+            className="flex items-center justify-center py-1 rounded text-[10px] font-medium transition bg-amber-600 hover:bg-amber-500 text-white shadow-sm"
+          >
+            Amazon
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open(`https://search.rakuten.co.jp/search/mall/${encodeURIComponent(gpu.name)}/`, "_blank", "noopener,noreferrer");
+            }}
+            className="flex items-center justify-center py-1 rounded text-[10px] font-medium transition bg-red-600 hover:bg-red-500 text-white shadow-sm"
+          >
+            楽天
+          </button>
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }

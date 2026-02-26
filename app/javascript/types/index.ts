@@ -10,6 +10,7 @@ export interface Gpu {
   popularity: number;
   cost_performance: number;
   favorited: boolean;
+  amazon_asin: string | null;
 }
 
 export interface PriceHistoryPoint {

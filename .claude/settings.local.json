@@ -37,7 +37,19 @@
       "Bash(pkill:*)",
       "Bash(npx esbuild:*)",
       "Bash(ruby -rjson -e:*)",
-      "Bash(claude trust:*)"
+      "Bash(claude trust:*)",
+      "Bash(bundle exec rubocop:*)",
+      "Bash(npx eslint --version)",
+      "Bash(cat:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npm install:*)",
+      "Bash(node_modules/.bin/eslint:*)",
+      "Bash(node -e:*)",
+      "Bash(find:*)",
+      "Bash(bundle exec:*)",
+      "Bash(head:*)",
+      "Bash(grep:*)",
+      "Bash(tail:*)"
     ]
   }
 }

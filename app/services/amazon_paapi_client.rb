@@ -12,7 +12,7 @@ class AmazonPaapiClient
 
   def fetch_price(asin)
     payload = {
-      "ItemIds" => [asin],
+      "ItemIds" => [ asin ],
       "Resources" => [
         "ItemInfo.Title",
         "Offers.Listings.Price",

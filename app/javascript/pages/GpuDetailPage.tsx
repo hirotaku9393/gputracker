@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import type { Gpu } from "../types";
 import { fetchGpu, addFavorite, removeFavorite } from "../api/client";
 import { useAuth } from "../contexts/AuthContext";
@@ -29,7 +29,7 @@ export default function GpuDetailPage() {
   const { showToast } = useToast();
   const navigate = useNavigate();
 
-  const loadGpu = async () => {
+  const loadGpu = useCallback(async () => {
     if (!id) return;
     setLoading(true);
     try {
@@ -41,11 +41,11 @@ export default function GpuDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, showToast]);
 
   useEffect(() => {
     loadGpu();
-  }, [id]);
+  }, [loadGpu]);
 
   const handleFavorite = async () => {
     if (!gpu || !user) return;
@@ -162,7 +162,9 @@ export default function GpuDetailPage() {
               <p className="text-gray-400 text-xs mb-3">ショップで探す</p>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href={buildSearchUrl("amazon", gpu.series)}
+                  href={gpu.amazon_asin?.length === 10
+                    ? `https://www.amazon.co.jp/dp/${gpu.amazon_asin}`
+                    : buildSearchUrl("amazon", gpu.name)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition bg-amber-600 hover:bg-amber-500 text-white shadow-md"
@@ -171,7 +173,7 @@ export default function GpuDetailPage() {
                   Amazon.co.jp
                 </a>
                 <a
-                  href={buildSearchUrl("rakuten", gpu.series)}
+                  href={buildSearchUrl("rakuten", gpu.name)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition bg-red-600 hover:bg-red-500 text-white shadow-md"

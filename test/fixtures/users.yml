@@ -1,0 +1,13 @@
+alice:
+  email: "alice@example.com"
+  name: "Alice"
+  provider: "google_oauth2"
+  uid: "alice_uid_123"
+  avatar_url: "https://example.com/alice.jpg"
+
+bob:
+  email: "bob@example.com"
+  name: "Bob"
+  provider: "google_oauth2"
+  uid: "bob_uid_456"
+  avatar_url:

@@ -18,7 +18,7 @@ function AuthErrorHandler() {
       next.delete("error");
       setSearchParams(next, { replace: true });
     }
-  }, []);
+  }, [searchParams, setSearchParams, showToast]);
 
   return null;
 }

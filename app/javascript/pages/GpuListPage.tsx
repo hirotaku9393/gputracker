@@ -74,7 +74,7 @@ export default function GpuListPage() {
     } finally {
       setLoading(false);
     }
-  }, [query, sort, manufacturer, priceMin, priceMax, page]);
+  }, [query, sort, manufacturer, priceMin, priceMax, page, showToast]);
 
   useEffect(() => {
     loadGpus();

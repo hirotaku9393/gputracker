@@ -1,0 +1,592 @@
+{
+  "Minitest": {
+    "coverage": {
+      "/home/vlhirokazu/gputracker/app/models/favorite.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          5,
+          null,
+          null,
+          1,
+          6,
+          null,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/models/gpu.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          24,
+          null,
+          null,
+          1,
+          13,
+          null,
+          null,
+          1,
+          1,
+          null,
+          3,
+          3,
+          4,
+          12,
+          3,
+          1,
+          3,
+          null,
+          null,
+          1,
+          20,
+          20,
+          20,
+          20,
+          null,
+          1,
+          4,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          null,
+          3,
+          null,
+          null
+        ],
+        "branches": {
+          "[:if, 0, 28, 4, 28, 62]": {
+            "[:then, 1, 28, 4, 28, 46]": 3,
+            "[:else, 2, 28, 4, 28, 62]": 17
+          },
+          "[:if, 3, 29, 4, 29, 62]": {
+            "[:then, 4, 29, 4, 29, 46]": 3,
+            "[:else, 5, 29, 4, 29, 62]": 17
+          },
+          "[:if, 6, 33, 4, 33, 62]": {
+            "[:then, 7, 33, 4, 33, 37]": 2,
+            "[:else, 8, 33, 4, 33, 62]": 2
+          }
+        }
+      },
+      "/home/vlhirokazu/gputracker/app/models/user.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          4,
+          2,
+          2,
+          2,
+          null,
+          null,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/models/price_history.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          31,
+          null,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/controllers/api/price_histories_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          5,
+          5,
+          5,
+          null,
+          5,
+          null,
+          null,
+          null,
+          5,
+          13,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          57,
+          null,
+          1,
+          null,
+          1,
+          10,
+          4,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+          "[:if, 0, 7, 4, 7, 78]": {
+            "[:then, 1, 7, 4, 7, 57]": 33,
+            "[:else, 2, 7, 4, 7, 78]": 24
+          },
+          "[:unless, 3, 12, 4, 14, 7]": {
+            "[:else, 4, 12, 4, 14, 7]": 6,
+            "[:then, 5, 13, 6, 13, 82]": 4
+          }
+        }
+      },
+      "/home/vlhirokazu/gputracker/app/helpers/application_helper.rb": {
+        "lines": [
+          1,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/controllers/api/gpus_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          16,
+          16,
+          16,
+          16,
+          null,
+          16,
+          1,
+          1,
+          2,
+          1,
+          1,
+          10,
+          null,
+          null,
+          16,
+          16,
+          16,
+          16,
+          null,
+          16,
+          1,
+          null,
+          15,
+          null,
+          null,
+          16,
+          null,
+          42,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          4,
+          4,
+          4,
+          null,
+          null,
+          1,
+          null,
+          1,
+          46,
+          33,
+          null,
+          13,
+          null,
+          null,
+          null,
+          46,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+          "[:if, 0, 8, 23, 8, 85]": {
+            "[:then, 1, 8, 45, 8, 80]": 1,
+            "[:else, 2, 8, 83, 8, 85]": 15
+          },
+          "[:if, 3, 10, 6, 10, 90]": {
+            "[:then, 4, 10, 6, 10, 56]": 1,
+            "[:else, 5, 10, 6, 10, 90]": 15
+          },
+          "[:case, 6, 13, 13, 20, 9]": {
+            "[:when, 7, 14, 28, 14, 45]": 1,
+            "[:when, 8, 15, 29, 15, 47]": 1,
+            "[:when, 9, 16, 30, 16, 49]": 2,
+            "[:when, 10, 17, 35, 17, 59]": 1,
+            "[:when, 11, 18, 23, 18, 35]": 1,
+            "[:else, 12, 19, 11, 19, 29]": 10
+          },
+          "[:if, 13, 27, 25, 31, 9]": {
+            "[:then, 14, 28, 27, 28, 64]": 1,
+            "[:else, 15, 30, 27, 30, 29]": 15
+          },
+          "[:if, 16, 48, 18, 48, 87]": {
+            "[:then, 17, 48, 33, 48, 79]": 2,
+            "[:else, 18, 48, 82, 48, 87]": 2
+          },
+          "[:if, 19, 55, 25, 59, 9]": {
+            "[:then, 20, 56, 27, 56, 91]": 33,
+            "[:else, 21, 58, 27, 58, 30]": 13
+          }
+        }
+      },
+      "/home/vlhirokazu/gputracker/app/controllers/api/favorites_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+          "[:if, 0, 29, 6, 33, 9]": {
+            "[:then, 1, 30, 8, 30, 83]": 1,
+            "[:else, 2, 32, 8, 32, 93]": 1
+          }
+        }
+      },
+      "/home/vlhirokazu/gputracker/app/controllers/api/users_controller.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          6,
+          3,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          3,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+          "[:if, 0, 4, 6, 13, 9]": {
+            "[:then, 1, 5, 8, 10, 9]": 3,
+            "[:else, 2, 12, 8, 12, 24]": 3
+          }
+        }
+      },
+      "/home/vlhirokazu/gputracker/app/controllers/sessions_controller.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/controllers/pages_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null
+        ],
+        "branches": {}
+      },
+      "/home/vlhirokazu/gputracker/app/services/amazon_paapi_client.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          8,
+          8,
+          8,
+          null,
+          null,
+          1,
+          null,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          8,
+          null,
+          8,
+          1,
+          1,
+          1,
+          null,
+          null,
+          8,
+          null,
+          null,
+          1,
+          null,
+          1,
+          8,
+          8,
+          8,
+          8,
+          null,
+          8,
+          null,
+          null,
+          null,
+          null,
+          8,
+          null,
+          8,
+          8,
+          null,
+          8,
+          8,
+          null,
+          8,
+          8,
+          null,
+          8,
+          null,
+          null,
+          null,
+          8,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          8,
+          8,
+          8,
+          8,
+          null,
+          null,
+          1,
+          32,
+          null,
+          null,
+          1,
+          8,
+          null,
+          6,
+          6,
+          6,
+          null,
+          4,
+          4,
+          null,
+          null,
+          8,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+          "[:unless, 0, 84, 4, 84, 39]": {
+            "[:else, 1, 84, 4, 84, 39]": 6,
+            "[:then, 2, 84, 4, 84, 14]": 2
+          },
+          "[:\"&.\", 3, 87, 11, 87, 50]": {
+            "[:then, 4, 87, 11, 87, 50]": 5,
+            "[:else, 5, 87, 11, 87, 50]": 1
+          },
+          "[:unless, 6, 88, 4, 88, 26]": {
+            "[:else, 7, 88, 4, 88, 26]": 4,
+            "[:then, 8, 88, 4, 88, 14]": 2
+          },
+          "[:\"&.\", 9, 90, 19, 90, 56]": {
+            "[:then, 10, 90, 19, 90, 56]": 3,
+            "[:else, 11, 90, 19, 90, 56]": 1
+          },
+          "[:\"&.\", 12, 90, 19, 90, 80]": {
+            "[:then, 13, 90, 19, 90, 80]": 2,
+            "[:else, 14, 90, 19, 90, 80]": 2
+          },
+          "[:if, 15, 94, 13, 94, 58]": {
+            "[:then, 16, 94, 28, 94, 52]": 2,
+            "[:else, 17, 94, 55, 94, 58]": 2
+          }
+        }
+      },
+      "/home/vlhirokazu/gputracker/app/jobs/fetch_gpu_prices_job.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          7,
+          7,
+          null,
+          7,
+          null,
+          7,
+          null,
+          7,
+          4,
+          null,
+          null,
+          null,
+          null,
+          4,
+          null,
+          null,
+          6,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+          "[:if, 0, 12, 8, 19, 11]": {
+            "[:then, 1, 13, 10, 18, 83]": 4,
+            "[:else, 2, 12, 8, 19, 11]": 2
+          },
+          "[:if, 3, 18, 10, 18, 83]": {
+            "[:then, 4, 18, 10, 18, 52]": 2,
+            "[:else, 5, 18, 10, 18, 83]": 2
+          }
+        }
+      }
+    },
+    "timestamp": 1771993779
+  }
+}

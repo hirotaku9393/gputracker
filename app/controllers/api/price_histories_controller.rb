@@ -3,7 +3,7 @@ module Api
     def index
       gpu = Gpu.find(params[:gpu_id])
       days = (params[:days] || 30).to_i
-      days = [days, 365].min
+      days = [ days, 365 ].min
 
       histories = gpu.price_histories
                      .where("recorded_at >= ?", days.days.ago)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import { fetchFavorites } from "../api/client";
@@ -11,7 +11,7 @@ export default function FavoritesPage() {
   const [gpus, setGpus] = useState<Gpu[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const loadFavorites = async () => {
+  const loadFavorites = useCallback(async () => {
     setLoading(true);
     try {
       const data = await fetchFavorites();
@@ -22,12 +22,12 @@ export default function FavoritesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showToast]);
 
   useEffect(() => {
     if (user) loadFavorites();
     else setLoading(false);
-  }, [user]);
+  }, [user, loadFavorites]);
 
   if (!user) {
     return (
