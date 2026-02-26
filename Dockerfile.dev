@@ -1,0 +1,38 @@
+ARG RUBY_VERSION=3.4.5
+FROM docker.io/library/ruby:$RUBY_VERSION
+
+WORKDIR /rails
+
+# システム依存パッケージ
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+      build-essential \
+      curl \
+      git \
+      libpq-dev \
+      libyaml-dev \
+      postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Node.js 22 インストール
+ARG NODE_VERSION=22
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
+
+# Yarn インストール
+ARG YARN_VERSION=1.22.22
+RUN npm install -g yarn@$YARN_VERSION
+
+# foreman インストール（Procfile.dev 実行用）
+RUN gem install foreman
+
+# Gemfile から gem インストール
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# JS パッケージインストール
+COPY package.json yarn.lock ./
+RUN yarn install
+
+EXPOSE 3001
