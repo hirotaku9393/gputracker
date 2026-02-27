@@ -16,6 +16,13 @@ module Gputracker
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # テスト用コントローラーを本番環境でのeager loadから除外
+    initializer "gputracker.ignore_test_controllers", before: :eager_load! do
+      unless Rails.env.test?
+        Rails.autoloaders.main.ignore(Rails.root.join("app/controllers/test_sessions_controller.rb"))
+      end
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
