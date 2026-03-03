@@ -100,7 +100,7 @@ export default function GpuCard({ gpu, onFavoriteToggle }: Props) {
         {gpu.cost_performance > 0 && (
           <div className="mt-1 sm:mt-1.5 flex items-center gap-1.5">
             <span className="text-gray-500 text-[10px] sm:text-xs">コスパ</span>
-            <span className="text-amber-400 font-semibold text-xs sm:text-sm">{gpu.cost_performance.toFixed(1)}</span>
+            <span className="text-amber-400 font-semibold text-xs sm:text-sm">{gpu.cost_performance.toFixed(1)}<span className="text-gray-500 text-[10px]">/100</span></span>
           </div>
         )}
         <div className="mt-2 pt-2 border-t border-white/5 grid grid-cols-2 gap-1.5">

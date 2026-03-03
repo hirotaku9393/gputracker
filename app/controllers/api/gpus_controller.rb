@@ -51,9 +51,16 @@ module Api
 
     private
 
+    def max_cost_performance
+      @max_cost_performance ||=
+        Gpu.where("current_price > 0 AND benchmark_score > 0")
+           .maximum("CAST(benchmark_score AS FLOAT) / current_price") || 1.0
+    end
+
     def gpu_json(gpu)
       cost_performance = if gpu.current_price.to_i > 0 && gpu.benchmark_score.to_i > 0
-                           (gpu.benchmark_score.to_f / gpu.current_price * 10_000).round(2)
+                           raw = gpu.benchmark_score.to_f / gpu.current_price
+                           (raw / max_cost_performance * 100).round(1)
       else
                            0.0
       end

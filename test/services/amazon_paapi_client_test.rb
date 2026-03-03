@@ -15,7 +15,7 @@ class AmazonPaapiClientTest < ActiveSupport::TestCase
       "ItemsResult" => {
         "Items" => [
           {
-            "Offers" => { "Listings" => [{ "Price" => { "Amount" => "89800" } }] },
+            "Offers" => { "Listings" => [ { "Price" => { "Amount" => "89800" } } ] },
             "Images" => { "Primary" => { "Large" => { "URL" => "https://example.com/gpu.jpg" } } }
           }
         ]
@@ -83,7 +83,7 @@ class AmazonPaapiClientTest < ActiveSupport::TestCase
   end
 
   test "fetch_price returns nil when ItemsResult is missing" do
-    response_body = { "Errors" => [{ "Code" => "ItemNotAccessible" }] }.to_json
+    response_body = { "Errors" => [ { "Code" => "ItemNotAccessible" } ] }.to_json
 
     mock_response = Minitest::Mock.new
     mock_response.expect(:success?, true)
@@ -101,7 +101,7 @@ class AmazonPaapiClientTest < ActiveSupport::TestCase
       "ItemsResult" => {
         "Items" => [
           {
-            "Offers" => { "Listings" => [{ "Price" => { "Amount" => "50000" } }] },
+            "Offers" => { "Listings" => [ { "Price" => { "Amount" => "50000" } } ] },
             "Images" => {}
           }
         ]

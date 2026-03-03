@@ -48,31 +48,31 @@ class GpuTest < ActiveSupport::TestCase
   # --- Scopes ---
 
   test "by_price_asc orders ascending" do
-    ids = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    ids = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
              .by_price_asc.map(&:id)
     assert_equal gpus(:rx_7900_xtx).id, ids.first
   end
 
   test "by_price_desc orders descending" do
-    ids = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    ids = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
              .by_price_desc.map(&:id)
     assert_equal gpus(:rtx_4090).id, ids.first
   end
 
   test "by_performance orders by benchmark_score descending" do
-    ids = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    ids = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
              .by_performance.map(&:id)
     assert_equal gpus(:rtx_4090).id, ids.first
   end
 
   test "by_popularity orders by popularity descending" do
-    ids = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    ids = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
              .by_popularity.map(&:id)
     assert_equal gpus(:rtx_4090).id, ids.first
   end
 
   test "by_name orders by name ascending" do
-    ids = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    ids = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
              .by_name.map(&:id)
     # "ASUS..." < "SAPPHIRE..."
     assert_equal gpus(:rtx_4090).id, ids.first
@@ -80,7 +80,7 @@ class GpuTest < ActiveSupport::TestCase
 
   test "by_cost_performance orders by score/price ratio descending" do
     # rtx_4090: 5200/320000=0.01625, rx_7900_xtx: 4314/160000=0.026963
-    ids = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    ids = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
              .by_cost_performance.map(&:id)
     assert_equal gpus(:rx_7900_xtx).id, ids.first
   end
@@ -91,35 +91,35 @@ class GpuTest < ActiveSupport::TestCase
   end
 
   test "price_between with min only filters correctly" do
-    result = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    result = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
                .price_between("200000", nil)
     assert_includes result.map(&:id), gpus(:rtx_4090).id
     assert_not_includes result.map(&:id), gpus(:rx_7900_xtx).id
   end
 
   test "price_between with max only filters correctly" do
-    result = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    result = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
                .price_between(nil, "200000")
     assert_not_includes result.map(&:id), gpus(:rtx_4090).id
     assert_includes result.map(&:id), gpus(:rx_7900_xtx).id
   end
 
   test "price_between with no bounds returns all" do
-    result = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    result = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
                .price_between(nil, nil)
     assert_includes result.map(&:id), gpus(:rtx_4090).id
     assert_includes result.map(&:id), gpus(:rx_7900_xtx).id
   end
 
   test "price_between with both min and max filters correctly" do
-    result = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    result = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
                .price_between("100000", "200000")
     assert_not_includes result.map(&:id), gpus(:rtx_4090).id
     assert_includes result.map(&:id), gpus(:rx_7900_xtx).id
   end
 
   test "by_manufacturer with value filters by manufacturer" do
-    result = Gpu.where(id: [gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id])
+    result = Gpu.where(id: [ gpus(:rtx_4090).id, gpus(:rx_7900_xtx).id ])
                .by_manufacturer("NVIDIA")
     assert_includes result.map(&:id), gpus(:rtx_4090).id
     assert_not_includes result.map(&:id), gpus(:rx_7900_xtx).id

@@ -148,7 +148,7 @@ export default function GpuDetailPage() {
               <div>
                 <span className="text-gray-400 text-sm">コスパ</span>
                 <p className="text-amber-400 font-bold text-lg sm:text-xl">
-                  {gpu.cost_performance > 0 ? gpu.cost_performance.toFixed(1) : "-"}
+                  {gpu.cost_performance > 0 ? `${gpu.cost_performance.toFixed(1)}/100` : "-"}
                 </p>
               </div>
               <div>

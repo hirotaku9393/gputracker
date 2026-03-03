@@ -10,7 +10,7 @@ class FetchGpuPricesJobTest < ActiveSupport::TestCase
   test "perform creates price history when price is returned" do
     gpu = gpus(:rtx_4090) # has amazon_asin
     mock_client = Minitest::Mock.new
-    mock_client.expect(:fetch_price, { price: 50000, image_url: "https://new-img.example.com/gpu.jpg" }, [gpu.amazon_asin])
+    mock_client.expect(:fetch_price, { price: 50000, image_url: "https://new-img.example.com/gpu.jpg" }, [ gpu.amazon_asin ])
 
     AmazonPaapiClient.stub(:new, mock_client) do
       Kernel.stub(:sleep, nil) do
@@ -29,7 +29,7 @@ class FetchGpuPricesJobTest < ActiveSupport::TestCase
   test "perform updates image_url when returned" do
     gpu = gpus(:rtx_4090)
     mock_client = Minitest::Mock.new
-    mock_client.expect(:fetch_price, { price: 60000, image_url: "https://updated-img.example.com/gpu.jpg" }, [gpu.amazon_asin])
+    mock_client.expect(:fetch_price, { price: 60000, image_url: "https://updated-img.example.com/gpu.jpg" }, [ gpu.amazon_asin ])
 
     AmazonPaapiClient.stub(:new, mock_client) do
       Kernel.stub(:sleep, nil) do
@@ -45,7 +45,7 @@ class FetchGpuPricesJobTest < ActiveSupport::TestCase
     gpu = gpus(:rtx_4090)
     original_image = gpu.image_url
     mock_client = Minitest::Mock.new
-    mock_client.expect(:fetch_price, { price: 60000, image_url: nil }, [gpu.amazon_asin])
+    mock_client.expect(:fetch_price, { price: 60000, image_url: nil }, [ gpu.amazon_asin ])
 
     AmazonPaapiClient.stub(:new, mock_client) do
       Kernel.stub(:sleep, nil) do
@@ -60,7 +60,7 @@ class FetchGpuPricesJobTest < ActiveSupport::TestCase
   test "perform skips gpu when fetch_price returns nil" do
     gpu = gpus(:rtx_4090)
     mock_client = Minitest::Mock.new
-    mock_client.expect(:fetch_price, nil, [gpu.amazon_asin])
+    mock_client.expect(:fetch_price, nil, [ gpu.amazon_asin ])
 
     AmazonPaapiClient.stub(:new, mock_client) do
       Kernel.stub(:sleep, nil) do
@@ -75,7 +75,7 @@ class FetchGpuPricesJobTest < ActiveSupport::TestCase
   test "perform skips gpu when result has no price" do
     gpu = gpus(:rtx_4090)
     mock_client = Minitest::Mock.new
-    mock_client.expect(:fetch_price, { price: nil, image_url: nil }, [gpu.amazon_asin])
+    mock_client.expect(:fetch_price, { price: nil, image_url: nil }, [ gpu.amazon_asin ])
 
     AmazonPaapiClient.stub(:new, mock_client) do
       Kernel.stub(:sleep, nil) do
@@ -90,7 +90,7 @@ class FetchGpuPricesJobTest < ActiveSupport::TestCase
   test "perform logs error and continues on exception" do
     gpu = gpus(:rtx_4090)
     mock_client = Minitest::Mock.new
-    mock_client.expect(:fetch_price, ->(_asin) { raise StandardError, "API Error" }, [gpu.amazon_asin])
+    mock_client.expect(:fetch_price, ->(_asin) { raise StandardError, "API Error" }, [ gpu.amazon_asin ])
 
     logged = []
     Rails.logger.stub(:error, ->(msg) { logged << msg }) do
@@ -110,7 +110,7 @@ class FetchGpuPricesJobTest < ActiveSupport::TestCase
     # rx_7900_xtx and zero_price_gpu have no amazon_asin
     mock_client = Minitest::Mock.new
     # Only expect one call (rtx_4090)
-    mock_client.expect(:fetch_price, { price: 70000, image_url: nil }, [gpus(:rtx_4090).amazon_asin])
+    mock_client.expect(:fetch_price, { price: 70000, image_url: nil }, [ gpus(:rtx_4090).amazon_asin ])
 
     assert_difference "PriceHistory.count", 1 do
       AmazonPaapiClient.stub(:new, mock_client) do
