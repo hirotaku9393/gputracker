@@ -1,17 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import type { Gpu } from "../types";
 import { fetchGpu, addFavorite, removeFavorite } from "../api/client";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import PriceChart from "../components/PriceChart";
 import GpuImage from "../components/GpuImage";
 
-function formatPrice(price: number): string {
+function formatPrice(price) {
   return `¥${price.toLocaleString()}`;
 }
 
-function buildSearchUrl(store: "amazon" | "rakuten", gpuName: string): string {
+function buildSearchUrl(store, gpuName) {
   const query = encodeURIComponent(gpuName);
   switch (store) {
     case "amazon":
@@ -22,8 +21,8 @@ function buildSearchUrl(store: "amazon" | "rakuten", gpuName: string): string {
 }
 
 export default function GpuDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const [gpu, setGpu] = useState<Gpu | null>(null);
+  const { id } = useParams();
+  const [gpu, setGpu] = useState(null);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const { showToast } = useToast();
@@ -148,7 +147,7 @@ export default function GpuDetailPage() {
               <div>
                 <span className="text-gray-400 text-sm">コスパ</span>
                 <p className="text-amber-400 font-bold text-lg sm:text-xl">
-                  {gpu.cost_performance > 0 ? `${gpu.cost_performance.toFixed(1)}/100` : "-"}
+                  {gpu.cost_performance > 0 ? <>{gpu.cost_performance.toFixed(1)}<span className="text-sm text-gray-400">/100</span></> : "-"}
                 </p>
               </div>
               <div>

@@ -1,20 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import type { Gpu } from "../types";
 import { useAuth } from "../contexts/AuthContext";
 import { addFavorite, removeFavorite } from "../api/client";
 import GpuImage from "./GpuImage";
 
-interface Props {
-  gpu: Gpu;
-  onFavoriteToggle?: () => void;
-}
-
-function formatPrice(price: number): string {
+function formatPrice(price) {
   return `¥${price.toLocaleString()}`;
 }
 
-function manufacturerBadge(manufacturer: string): string {
+function manufacturerBadge(manufacturer) {
   switch (manufacturer) {
     case "NVIDIA":
       return "badge-nvidia";
@@ -27,11 +21,11 @@ function manufacturerBadge(manufacturer: string): string {
   }
 }
 
-export default function GpuCard({ gpu, onFavoriteToggle }: Props) {
+export default function GpuCard({ gpu, onFavoriteToggle }) {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const handleFavorite = async (e: React.MouseEvent) => {
+  const handleFavorite = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (!user) return;

@@ -1,21 +1,11 @@
 import React, { createContext, useCallback, useContext, useState } from "react";
 
-interface Toast {
-  id: string;
-  message: string;
-  type: "error" | "success" | "info";
-}
+const ToastContext = createContext({ showToast: () => {} });
 
-interface ToastContextType {
-  showToast: (message: string, type?: Toast["type"]) => void;
-}
+export function ToastProvider({ children }) {
+  const [toasts, setToasts] = useState([]);
 
-const ToastContext = createContext<ToastContextType>({ showToast: () => {} });
-
-export function ToastProvider({ children }: { children: React.ReactNode }) {
-  const [toasts, setToasts] = useState<Toast[]>([]);
-
-  const showToast = useCallback((message: string, type: Toast["type"] = "error") => {
+  const showToast = useCallback((message, type = "error") => {
     const id = Date.now().toString();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {

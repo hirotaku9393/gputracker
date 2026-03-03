@@ -4,12 +4,12 @@ import React from "react";
 
 const mockShowToast = vi.fn();
 vi.mock("../contexts/ToastContext", () => ({
-  ToastProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  ToastProvider: ({ children }) => <>{children}</>,
   useToast: () => ({ showToast: mockShowToast }),
 }));
 
 vi.mock("../contexts/AuthContext", () => ({
-  AuthProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  AuthProvider: ({ children }) => <>{children}</>,
 }));
 
 vi.mock("../components/Navbar", () => ({

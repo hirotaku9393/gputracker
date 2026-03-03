@@ -53,7 +53,7 @@ describe("GpuImage", () => {
 
   it("applies custom className", () => {
     const { container } = render(<GpuImage {...baseProps} className="custom-class" />);
-    const div = container.firstChild as HTMLElement;
+    const div = container.firstChild;
     expect(div.className).toContain("custom-class");
   });
 });

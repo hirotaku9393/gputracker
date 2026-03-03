@@ -10,7 +10,7 @@ vi.mock("../../contexts/AuthContext", () => ({
   useAuth: () => mockUseAuth(),
 }));
 
-function renderNavbar(authState: object) {
+function renderNavbar(authState) {
   mockUseAuth.mockReturnValue(authState);
   return render(
     <MemoryRouter>
@@ -54,7 +54,7 @@ describe("Navbar", () => {
     renderNavbar({ user, loading: false });
     expect(screen.getAllByText("Alice")[0]).toBeInTheDocument();
     const avatars = screen.getAllByRole("img");
-    expect(avatars.some(img => (img as HTMLImageElement).src.includes("alice.jpg"))).toBe(true);
+    expect(avatars.some(img => img.src.includes("alice.jpg"))).toBe(true);
   });
 
   it("shows user info when logged in (without avatar)", () => {
@@ -169,7 +169,7 @@ describe("Navbar", () => {
     document.head.appendChild(meta);
     try {
       renderNavbar({ user: null, loading: false });
-      const tokenInput = document.querySelector('input[name="authenticity_token"]') as HTMLInputElement;
+      const tokenInput = document.querySelector('input[name="authenticity_token"]');
       expect(tokenInput?.value).toBe("test-csrf-token");
     } finally {
       document.head.removeChild(meta);
@@ -183,6 +183,6 @@ describe("Navbar", () => {
     const hamburger = screen.getByRole("button", { name: "" });
     await user.click(hamburger);
     const images = screen.getAllByRole("img");
-    expect(images.some(img => (img as HTMLImageElement).src.includes("alice.jpg"))).toBe(true);
+    expect(images.some(img => img.src.includes("alice.jpg"))).toBe(true);
   });
 });

@@ -4,7 +4,7 @@ import { fireEvent } from "@testing-library/react";
 import React from "react";
 import { ToastProvider, useToast } from "../../contexts/ToastContext";
 
-function ToastTrigger({ type }: { type?: "error" | "success" | "info" }) {
+function ToastTrigger({ type }) {
   const { showToast } = useToast();
   return (
     <button onClick={() => showToast("Test message", type)}>
@@ -81,7 +81,7 @@ describe("ToastContext", () => {
 
   it("default context showToast is callable without errors", () => {
     // Render outside of ToastProvider to get the default context value
-    let capturedShowToast: ((msg: string) => void) | undefined;
+    let capturedShowToast;
     function Capturer() {
       capturedShowToast = useToast().showToast;
       return null;
@@ -92,7 +92,7 @@ describe("ToastContext", () => {
   });
 
   it("useToast returns context", () => {
-    let captured: ReturnType<typeof useToast> | undefined;
+    let captured;
     function Capturer() {
       captured = useToast();
       return null;

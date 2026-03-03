@@ -4,19 +4,18 @@ import userEvent from "@testing-library/user-event";
 import React from "react";
 import { MemoryRouter } from "react-router-dom";
 import GpuCard from "../../components/GpuCard";
-import type { Gpu } from "../../types";
 
 const mockAddFavorite = vi.fn();
 const mockRemoveFavorite = vi.fn();
 const mockNavigate = vi.fn();
 
 vi.mock("../../api/client", () => ({
-  addFavorite: (...args: unknown[]) => mockAddFavorite(...args),
-  removeFavorite: (...args: unknown[]) => mockRemoveFavorite(...args),
+  addFavorite: (...args) => mockAddFavorite(...args),
+  removeFavorite: (...args) => mockRemoveFavorite(...args),
 }));
 
 vi.mock("react-router-dom", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router-dom")>();
+  const actual = await importOriginal();
   return {
     ...actual,
     useNavigate: () => mockNavigate,
@@ -28,7 +27,7 @@ vi.mock("../../contexts/AuthContext", () => ({
   useAuth: () => mockUseAuth(),
 }));
 
-const gpu: Gpu = {
+const gpu = {
   id: 1,
   name: "ASUS ROG STRIX RTX 4090",
   manufacturer: "NVIDIA",
@@ -43,7 +42,7 @@ const gpu: Gpu = {
   amazon_asin: "B0TEST1234",
 };
 
-function renderCard(gpuOverrides: Partial<Gpu> = {}, user: object | null = null) {
+function renderCard(gpuOverrides = {}, user = null) {
   mockUseAuth.mockReturnValue({ user });
   return render(
     <MemoryRouter>
@@ -80,7 +79,7 @@ describe("GpuCard", () => {
   });
 
   it("shows - for benchmark when score is null", () => {
-    renderCard({ benchmark_score: null as unknown as number });
+    renderCard({ benchmark_score: null });
     expect(screen.getByText("Score: -")).toBeInTheDocument();
   });
 

@@ -10,9 +10,9 @@ const mockAddFavorite = vi.fn();
 const mockRemoveFavorite = vi.fn();
 
 vi.mock("../../api/client", () => ({
-  fetchGpu: (...args: unknown[]) => mockFetchGpu(...args),
-  addFavorite: (...args: unknown[]) => mockAddFavorite(...args),
-  removeFavorite: (...args: unknown[]) => mockRemoveFavorite(...args),
+  fetchGpu: (...args) => mockFetchGpu(...args),
+  addFavorite: (...args) => mockAddFavorite(...args),
+  removeFavorite: (...args) => mockRemoveFavorite(...args),
 }));
 
 const mockShowToast = vi.fn();
@@ -27,7 +27,7 @@ vi.mock("../../contexts/AuthContext", () => ({
 
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("react-router-dom")>();
+  const actual = await importOriginal();
   return {
     ...actual,
     useNavigate: () => mockNavigate,
@@ -35,7 +35,7 @@ vi.mock("react-router-dom", async (importOriginal) => {
 });
 
 vi.mock("../../components/PriceChart", () => ({
-  default: ({ gpuId }: { gpuId: number }) => (
+  default: ({ gpuId }) => (
     <div data-testid="price-chart" data-gpu-id={gpuId} />
   ),
 }));
@@ -149,7 +149,7 @@ describe("GpuDetailPage", () => {
   it("shows - when benchmark_score is null", async () => {
     mockFetchGpu.mockResolvedValueOnce({
       ...mockGpu,
-      benchmark_score: null as unknown as number,
+      benchmark_score: null,
     });
     renderPage();
     await waitFor(() => screen.getByText("RTX 4090"));

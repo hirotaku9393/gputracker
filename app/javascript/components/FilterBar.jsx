@@ -1,20 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import type { SortOption } from "../types";
 
-interface Props {
-  query: string;
-  onQueryChange: (q: string) => void;
-  sort: SortOption;
-  onSortChange: (sort: SortOption) => void;
-  manufacturer: string;
-  onManufacturerChange: (m: string) => void;
-  priceMin: string;
-  onPriceMinChange: (v: string) => void;
-  priceMax: string;
-  onPriceMaxChange: (v: string) => void;
-}
-
-const SORT_OPTIONS: { label: string; value: SortOption }[] = [
+const SORT_OPTIONS = [
   { label: "人気順", value: "popularity" },
   { label: "価格が安い順", value: "price_asc" },
   { label: "価格が高い順", value: "price_desc" },
@@ -46,16 +32,16 @@ export default function FilterBar({
   onPriceMinChange,
   priceMax,
   onPriceMaxChange,
-}: Props) {
+}) {
   const [localQuery, setLocalQuery] = useState(query);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef();
 
   // 親のqueryが外部から変わった場合（保存検索適用など）に同期
   useEffect(() => {
     setLocalQuery(query);
   }, [query]);
 
-  const handleQueryInput = (value: string) => {
+  const handleQueryInput = (value) => {
     setLocalQuery(value);
     clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => onQueryChange(value), 400);
@@ -91,7 +77,7 @@ export default function FilterBar({
           </label>
           <select
             value={sort}
-            onChange={(e) => onSortChange(e.target.value as SortOption)}
+            onChange={(e) => onSortChange(e.target.value)}
             className="w-full sm:w-auto bg-white/5 border border-white/10 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-white/10 transition"
           >
             {SORT_OPTIONS.map((opt) => (

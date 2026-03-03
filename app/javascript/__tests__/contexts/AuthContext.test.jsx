@@ -5,7 +5,7 @@ import { AuthProvider, useAuth } from "../../contexts/AuthContext";
 
 const mockFetchMe = vi.fn();
 vi.mock("../../api/client", () => ({
-  fetchMe: (...args: unknown[]) => mockFetchMe(...args),
+  fetchMe: (...args) => mockFetchMe(...args),
 }));
 
 function TestConsumer() {
@@ -96,7 +96,7 @@ describe("AuthContext", () => {
 
   it("default context refresh is a no-op callable function", async () => {
     // Render outside of AuthProvider to get the default context value
-    let capturedRefresh: (() => Promise<void>) | undefined;
+    let capturedRefresh;
     function Capturer() {
       const { refresh } = useAuth();
       capturedRefresh = refresh;

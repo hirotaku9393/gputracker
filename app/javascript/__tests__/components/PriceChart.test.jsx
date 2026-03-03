@@ -6,24 +6,24 @@ import PriceChart from "../../components/PriceChart";
 
 const mockFetchPriceHistories = vi.fn();
 vi.mock("../../api/client", () => ({
-  fetchPriceHistories: (...args: unknown[]) => mockFetchPriceHistories(...args),
+  fetchPriceHistories: (...args) => mockFetchPriceHistories(...args),
 }));
 
 // Mock recharts components to avoid SVG rendering issues in jsdom
 vi.mock("recharts", () => ({
-  LineChart: ({ children }: { children: React.ReactNode }) => <div data-testid="line-chart">{children}</div>,
+  LineChart: ({ children }) => <div data-testid="line-chart">{children}</div>,
   Line: () => null,
   XAxis: () => null,
-  YAxis: ({ tickFormatter }: { tickFormatter?: (v: number) => string }) => {
+  YAxis: ({ tickFormatter }) => {
     tickFormatter?.(100000);
     return null;
   },
   CartesianGrid: () => null,
-  Tooltip: ({ formatter }: { formatter?: (v: number) => [string, string] }) => {
+  Tooltip: ({ formatter }) => {
     formatter?.(200000);
     return null;
   },
-  ResponsiveContainer: ({ children }: { children: React.ReactNode }) => (
+  ResponsiveContainer: ({ children }) => (
     <div data-testid="responsive-container">{children}</div>
   ),
 }));

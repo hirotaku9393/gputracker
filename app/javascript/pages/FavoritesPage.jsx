@@ -2,13 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import { fetchFavorites } from "../api/client";
-import type { Gpu } from "../types";
 import GpuCard from "../components/GpuCard";
 
 export default function FavoritesPage() {
   const { user } = useAuth();
   const { showToast } = useToast();
-  const [gpus, setGpus] = useState<Gpu[]>([]);
+  const [gpus, setGpus] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const loadFavorites = useCallback(async () => {

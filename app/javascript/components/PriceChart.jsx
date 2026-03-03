@@ -8,12 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import type { PriceHistoryPoint } from "../types";
 import { fetchPriceHistories } from "../api/client";
-
-interface Props {
-  gpuId: number;
-}
 
 const PERIOD_OPTIONS = [
   { label: "7日", value: 7 },
@@ -22,12 +17,12 @@ const PERIOD_OPTIONS = [
   { label: "1年", value: 365 },
 ];
 
-function formatYen(value: number): string {
+function formatYen(value) {
   return `¥${value.toLocaleString()}`;
 }
 
-export default function PriceChart({ gpuId }: Props) {
-  const [data, setData] = useState<PriceHistoryPoint[] | null>(null);
+export default function PriceChart({ gpuId }) {
+  const [data, setData] = useState(null);
   const [days, setDays] = useState(30);
 
   const loading = data === null;
@@ -61,13 +56,13 @@ export default function PriceChart({ gpuId }: Props) {
         <div className="h-64 flex items-center justify-center text-gray-400">
           読み込み中...
         </div>
-      ) : data!.length === 0 ? (
+      ) : data.length === 0 ? (
         <div className="h-64 flex items-center justify-center text-gray-400">
           価格データがありません
         </div>
       ) : (
         <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data!}>
+          <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
             <XAxis
               dataKey="date"
@@ -80,7 +75,7 @@ export default function PriceChart({ gpuId }: Props) {
               tick={{ fontSize: 12 }}
             />
             <Tooltip
-              formatter={(value: number) => [formatYen(value), "価格"]}
+              formatter={(value) => [formatYen(value), "価格"]}
               contentStyle={{
                 backgroundColor: "#1F2937",
                 border: "1px solid #374151",

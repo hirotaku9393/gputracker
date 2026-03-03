@@ -2,12 +2,11 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, act, fireEvent } from "@testing-library/react";
 import React from "react";
 import FilterBar from "../../components/FilterBar";
-import type { SortOption } from "../../types";
 
 const defaultProps = {
   query: "",
   onQueryChange: vi.fn(),
-  sort: "popularity" as SortOption,
+  sort: "popularity",
   onSortChange: vi.fn(),
   manufacturer: "",
   onManufacturerChange: vi.fn(),
@@ -76,7 +75,7 @@ describe("FilterBar", () => {
   it("syncs localQuery when parent query prop changes", () => {
     const { rerender } = render(<FilterBar {...defaultProps} query="" />);
     rerender(<FilterBar {...defaultProps} query="RTX" />);
-    const input = screen.getByPlaceholderText(/GPU名・シリーズ名で検索/i) as HTMLInputElement;
+    const input = screen.getByPlaceholderText(/GPU名・シリーズ名で検索/i);
     expect(input.value).toBe("RTX");
   });
 
@@ -97,7 +96,7 @@ describe("FilterBar", () => {
 
   it("renders with priceMin set showing correct minVal", () => {
     render(<FilterBar {...defaultProps} priceMin="100000" priceMax="300000" />);
-    const [minSlider] = screen.getAllByRole("slider") as HTMLInputElement[];
+    const [minSlider] = screen.getAllByRole("slider");
     expect(minSlider.value).toBe("100000");
   });
 

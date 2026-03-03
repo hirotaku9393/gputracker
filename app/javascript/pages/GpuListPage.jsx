@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
-import type { Gpu, SortOption, SavedSearch } from "../types";
 import { fetchGpus } from "../api/client";
 import { useToast } from "../contexts/ToastContext";
 import GpuCard from "../components/GpuCard";
 import FilterBar from "../components/FilterBar";
 import Pagination from "../components/Pagination";
 
-const SORT_LABELS: Record<SortOption, string> = {
+const SORT_LABELS = {
   popularity: "人気順",
   price_asc: "価格安い順",
   price_desc: "価格高い順",
@@ -16,7 +15,7 @@ const SORT_LABELS: Record<SortOption, string> = {
   name: "名前順",
 };
 
-function loadSavedSearches(): SavedSearch[] {
+function loadSavedSearches() {
   try {
     return JSON.parse(localStorage.getItem("gpu_saved_searches") || "[]");
   } catch {
@@ -24,28 +23,28 @@ function loadSavedSearches(): SavedSearch[] {
   }
 }
 
-function storeSavedSearches(searches: SavedSearch[]) {
+function storeSavedSearches(searches) {
   localStorage.setItem("gpu_saved_searches", JSON.stringify(searches));
 }
 
 export default function GpuListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [gpus, setGpus] = useState<Gpu[]>([]);
+  const [gpus, setGpus] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const [savedSearches, setSavedSearches] = useState<SavedSearch[]>(loadSavedSearches);
+  const [savedSearches, setSavedSearches] = useState(loadSavedSearches);
   const { showToast } = useToast();
 
   // URLクエリからフィルタ状態を取得
   const query = searchParams.get("q") || "";
-  const sort = (searchParams.get("sort") as SortOption) || "popularity";
+  const sort = searchParams.get("sort") || "popularity";
   const manufacturer = searchParams.get("manufacturer") || "";
   const priceMin = searchParams.get("price_min") || "";
   const priceMax = searchParams.get("price_max") || "";
   const page = Number(searchParams.get("page")) || 1;
 
-  const updateParams = (updates: Record<string, string>) => {
+  const updateParams = (updates) => {
     const newParams = new URLSearchParams(searchParams);
     Object.entries(updates).forEach(([k, v]) => {
       if (v) newParams.set(k, v);
@@ -80,16 +79,16 @@ export default function GpuListPage() {
     loadGpus();
   }, [loadGpus]);
 
-  const handleQueryChange = (q: string) => updateParams({ q, page: "" });
-  const handleSortChange = (s: SortOption) => updateParams({ sort: s, page: "" });
-  const handleManufacturerChange = (m: string) => updateParams({ manufacturer: m, page: "" });
-  const handlePriceMinChange = (v: string) => updateParams({ price_min: v, page: "" });
-  const handlePriceMaxChange = (v: string) => updateParams({ price_max: v, page: "" });
-  const handlePageChange = (p: number) => updateParams({ page: p > 1 ? String(p) : "" });
+  const handleQueryChange = (q) => updateParams({ q, page: "" });
+  const handleSortChange = (s) => updateParams({ sort: s, page: "" });
+  const handleManufacturerChange = (m) => updateParams({ manufacturer: m, page: "" });
+  const handlePriceMinChange = (v) => updateParams({ price_min: v, page: "" });
+  const handlePriceMaxChange = (v) => updateParams({ price_max: v, page: "" });
+  const handlePageChange = (p) => updateParams({ page: p > 1 ? String(p) : "" });
 
   // 検索条件を保存
   const handleSaveSearch = () => {
-    const parts: string[] = [];
+    const parts = [];
     if (manufacturer) parts.push(manufacturer);
     if (priceMin || priceMax) {
       const min = priceMin ? `¥${Number(priceMin).toLocaleString()}` : "¥0";
@@ -98,7 +97,7 @@ export default function GpuListPage() {
     }
     parts.push(SORT_LABELS[sort]);
 
-    const search: SavedSearch = {
+    const search = {
       id: Date.now().toString(),
       label: parts.join(" / ") || "全GPU・人気順",
       sort,
@@ -114,7 +113,7 @@ export default function GpuListPage() {
   };
 
   // 保存した検索条件を適用
-  const handleApplySearch = (s: SavedSearch) => {
+  const handleApplySearch = (s) => {
     setSearchParams(new URLSearchParams({
       ...(s.sort !== "popularity" ? { sort: s.sort } : {}),
       ...(s.manufacturer ? { manufacturer: s.manufacturer } : {}),
@@ -123,7 +122,7 @@ export default function GpuListPage() {
     }));
   };
 
-  const handleDeleteSearch = (id: string) => {
+  const handleDeleteSearch = (id) => {
     const updated = savedSearches.filter((s) => s.id !== id);
     setSavedSearches(updated);
     storeSavedSearches(updated);

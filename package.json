@@ -14,19 +14,16 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "jsdom": "^26.1.0",
-    "typescript-eslint": "^8.56.0",
     "vitest": "^3.0.9"
   },
   "scripts": {
-    "build": "esbuild app/javascript/application.tsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.tsx=tsx --loader:.ts=ts",
+    "build": "esbuild app/javascript/application.jsx --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
     "build:css": "npx @tailwindcss/cli -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
     "axios": "^1.13.5",
     "axios-mock-adapter": "^2.1.0",
     "react": "^19.2.4",
@@ -34,7 +31,6 @@
     "react-is": "^19.2.4",
     "react-router-dom": "6",
     "recharts": "^3.7.0",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.1.18"
   }
 }

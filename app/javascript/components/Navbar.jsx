@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-function getCsrfToken(): string {
+function getCsrfToken() {
   return document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
 }
 
-function GoogleLoginForm({ className }: { className?: string }) {
+function GoogleLoginForm({ className }) {
   return (
     <form action="/auth/google_oauth2" method="post">
       <input type="hidden" name="authenticity_token" value={getCsrfToken()} />

@@ -1,15 +1,6 @@
 import React from "react";
 
-interface Props {
-  name: string;
-  series: string;
-  manufacturer: string;
-  vram: number;
-  imageUrl: string | null;
-  className?: string;
-}
-
-const BRAND_CONFIGS: Record<string, { bg: string; accent: string; accentRgb: string; logo: string }> = {
+const BRAND_CONFIGS = {
   NVIDIA: {
     bg: "#1a1d1a",
     accent: "#76b900",
@@ -30,7 +21,7 @@ const BRAND_CONFIGS: Record<string, { bg: string; accent: string; accentRgb: str
   },
 };
 
-export default function GpuImage({ name, series, manufacturer, vram, imageUrl, className = "" }: Props) {
+export default function GpuImage({ name, series, manufacturer, vram, imageUrl, className = "" }) {
   if (imageUrl) {
     return (
       <img

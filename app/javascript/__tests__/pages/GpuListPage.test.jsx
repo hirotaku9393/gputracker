@@ -7,7 +7,7 @@ import GpuListPage from "../../pages/GpuListPage";
 
 const mockFetchGpus = vi.fn();
 vi.mock("../../api/client", () => ({
-  fetchGpus: (...args: unknown[]) => mockFetchGpus(...args),
+  fetchGpus: (...args) => mockFetchGpus(...args),
   addFavorite: vi.fn(),
   removeFavorite: vi.fn(),
 }));
@@ -21,17 +21,11 @@ vi.mock("../../contexts/ToastContext", () => ({
 }));
 
 vi.mock("../../components/GpuCard", () => ({
-  default: ({ gpu }: { gpu: { name: string } }) => <div data-testid="gpu-card">{gpu.name}</div>,
+  default: ({ gpu }) => <div data-testid="gpu-card">{gpu.name}</div>,
 }));
 
 vi.mock("../../components/FilterBar", () => ({
-  default: ({ onQueryChange, onSortChange, onManufacturerChange, onPriceMinChange, onPriceMaxChange }: {
-    onQueryChange: (q: string) => void;
-    onSortChange: (s: string) => void;
-    onManufacturerChange: (m: string) => void;
-    onPriceMinChange: (v: string) => void;
-    onPriceMaxChange: (v: string) => void;
-  }) => (
+  default: ({ onQueryChange, onSortChange, onManufacturerChange, onPriceMinChange, onPriceMaxChange }) => (
     <div data-testid="filter-bar">
       <button onClick={() => onQueryChange("RTX")}>search</button>
       <button onClick={() => onSortChange("price_asc")}>sort</button>
@@ -43,7 +37,7 @@ vi.mock("../../components/FilterBar", () => ({
 }));
 
 vi.mock("../../components/Pagination", () => ({
-  default: ({ onPageChange }: { onPageChange: (p: number) => void }) => (
+  default: ({ onPageChange }) => (
     <>
       <button onClick={() => onPageChange(1)}>page-1</button>
       <button onClick={() => onPageChange(2)}>page-2</button>
@@ -336,7 +330,7 @@ describe("GpuListPage", () => {
     const savedSearch = {
       id: "no-filter-1",
       label: "人気順",
-      sort: "popularity" as const,
+      sort: "popularity",
       manufacturer: "",
       priceMin: "",
       priceMax: "",

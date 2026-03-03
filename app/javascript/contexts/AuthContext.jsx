@@ -1,21 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import type { User } from "../types";
 import { fetchMe } from "../api/client";
 
-interface AuthContextType {
-  user: User | null;
-  loading: boolean;
-  refresh: () => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextType>({
+const AuthContext = createContext({
   user: null,
   loading: true,
   refresh: async () => {},
 });
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const refresh = async () => {

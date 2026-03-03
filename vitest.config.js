@@ -4,14 +4,13 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     globals: true,
-    setupFiles: ["./app/javascript/__tests__/setup.ts"],
+    setupFiles: ["./app/javascript/__tests__/setup.js"],
     coverage: {
       provider: "v8",
-      include: ["app/javascript/**/*.{ts,tsx}"],
+      include: ["app/javascript/**/*.{js,jsx}"],
       exclude: [
-        "app/javascript/application.tsx",
+        "app/javascript/application.jsx",
         "app/javascript/__tests__/**",
-        "app/javascript/types/**",
       ],
       reporter: ["text", "html"],
       all: true,

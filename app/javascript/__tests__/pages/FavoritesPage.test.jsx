@@ -6,7 +6,7 @@ import FavoritesPage from "../../pages/FavoritesPage";
 
 const mockFetchFavorites = vi.fn();
 vi.mock("../../api/client", () => ({
-  fetchFavorites: (...args: unknown[]) => mockFetchFavorites(...args),
+  fetchFavorites: (...args) => mockFetchFavorites(...args),
 }));
 
 const mockShowToast = vi.fn();
@@ -20,7 +20,7 @@ vi.mock("../../contexts/AuthContext", () => ({
 }));
 
 vi.mock("../../components/GpuCard", () => ({
-  default: ({ gpu }: { gpu: { name: string } }) => (
+  default: ({ gpu }) => (
     <div data-testid="gpu-card">{gpu.name}</div>
   ),
 }));

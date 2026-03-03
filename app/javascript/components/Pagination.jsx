@@ -1,16 +1,9 @@
 import React from "react";
 
-interface Props {
-  currentPage: number;
-  totalPages: number;
-  totalCount: number;
-  onPageChange: (page: number) => void;
-}
-
-export default function Pagination({ currentPage, totalPages, totalCount, onPageChange }: Props) {
+export default function Pagination({ currentPage, totalPages, totalCount, onPageChange }) {
   if (totalPages <= 1) return null;
 
-  const pages: (number | "...")[] = [];
+  const pages = [];
 
   if (totalPages <= 7) {
     for (let i = 1; i <= totalPages; i++) pages.push(i);
