@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useSearchParams } from "react-router-dom"
 import { AuthProvider } from "./contexts/AuthContext";
 import { ToastProvider, useToast } from "./contexts/ToastContext";
 import Navbar from "./components/Navbar";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 import GpuListPage from "./pages/GpuListPage";
 import GpuDetailPage from "./pages/GpuDetailPage";
 import FavoritesPage from "./pages/FavoritesPage";
@@ -36,6 +37,7 @@ export default function App() {
               <Route path="/gpus/:id" element={<GpuDetailPage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
             </Routes>
+            <ScrollToTopButton />
           </div>
         </BrowserRouter>
       </ToastProvider>

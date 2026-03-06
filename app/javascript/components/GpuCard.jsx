@@ -114,7 +114,7 @@ export default function GpuCard({ gpu, onFavoriteToggle }) {
               e.stopPropagation();
               window.open(`https://search.rakuten.co.jp/search/mall/${encodeURIComponent(gpu.name)}/`, "_blank", "noopener,noreferrer");
             }}
-            className="flex items-center justify-center py-1 rounded text-[10px] font-medium transition bg-red-600 hover:bg-red-500 text-white shadow-sm"
+            className="flex items-center justify-center py-1 rounded text-[10px] font-medium transition bg-pink-400 hover:bg-pink-300 text-white shadow-sm"
           >
             楽天
           </button>

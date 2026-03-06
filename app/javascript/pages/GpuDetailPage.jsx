@@ -175,7 +175,7 @@ export default function GpuDetailPage() {
                   href={buildSearchUrl("rakuten", gpu.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition bg-red-600 hover:bg-red-500 text-white shadow-md"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition bg-pink-400 hover:bg-pink-300 text-white shadow-md"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                   楽天市場
